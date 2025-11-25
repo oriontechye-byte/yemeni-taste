@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Yemeni Taste</title>
+    <!-- استدعاء نفس التنسيقات والخطوط للحفاظ على التصميم -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Yemeni Taste</h1>
+                    <p class="logo-subtitle">إدارة المطعم</p>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">العودة للرئيسية</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- قسم تسجيل الدخول (يظهر فقط إذا لم يسجل الدخول) -->
+    <section id="login-section" class="login">
+        <div class="container">
+            <h2 class="section-title">تسجيل الدخول للإدارة</h2>
+            
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">تسجيل الدخول</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- قسم الداش بورد (يظهر فقط بعد تسجيل الدخول) -->
+    <section id="dashboard-section" class="menu" style="display: none; padding-top: 8rem;">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="section-title" style="margin: 0; text-align: right;">إدارة الأصناف</h2>
+                <div>
+                    <button class="admin-btn" onclick="openItemModal()">+ إضافة صنف جديد</button>
+                    <button class="admin-btn danger" onclick="logout()">تسجيل خروج</button>
+                </div>
+            </div>
+
+            <!-- جدول عرض الأصناف -->
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>الصورة</th>
+                        <th>اسم الصنف</th>
+                        <th>السعر</th>
+                        <th>الوصف</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-items-list">
+                    <!-- سيتم تعبئة الجدول بواسطة جافاسكربت -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- نافذة منبثقة لإضافة/تعديل صنف -->
+    <div id="item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeItemModal()">&times;</span>
+            <h3 id="modal-title" style="color: var(--color-gold); margin-bottom: 1rem;">إضافة صنف جديد</h3>
+            
+            <form id="item-form" class="contact-form">
+                <input type="hidden" id="item-index">
+                
+                <div class="form-group">
+                    <label for="item-name">اسم الصنف</label>
+                    <input type="text" id="item-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="item-price">السعر (ريال)</label>
+                    <input type="text" id="item-price" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="item-desc">الوصف</label>
+                    <textarea id="item-desc" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="item-image">رابط الصورة (مسار الصورة)</label>
+                    <input type="text" id="item-image" value="images/mandi.jpg" required>
+                    <small style="color: #666; margin-top: 5px;">يمكنك استخدام: images/mandi.jpg, images/saltah.png, images/fahsa.jpg ...</small>
+                </div>
+
+                <button type="submit" class="submit-btn">حفظ التغييرات</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yemeni Taste. لوحة تحكم الإدارة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

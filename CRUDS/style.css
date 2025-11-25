@@ -1,0 +1,154 @@
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f2f5; /* خلفية رمادية فاتحة جداً مريحة للعين */
+    color: #333; /* لون الخط غامق للقراءة بوضوح */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.crud {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: #fff; /* جعلنا الحاوية بيضاء كأنها بطاقة */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* ظل خفيف للجمالية */
+}
+
+.head {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* تنسيق حقول الإدخال */
+input {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: 1px solid #ccc; /* حدود رمادية */
+    background: #fff;
+    margin: 5px 0;
+    border-radius: 6px;
+    padding: 10px;
+    color: #333;
+    transition: 0.3s;
+}
+
+input:focus {
+    background: #f9f9f9;
+    border-color: #3498db; /* لون أزرق عند الكتابة */
+    transform: scale(1.01);
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.price input {
+    width: 20%;
+}
+
+/* تنسيق مربع الإجمالي */
+#total {
+    background: #e74c3c; /* أحمر عند عدم الحساب */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#total::before {
+    content: 'Total: ';
+}
+
+/* تنسيق الأزرار */
+button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    background: #3498db; /* أزرق أساسي */
+    color: #fff;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+button:hover {
+    background: #2980b9;
+    letter-spacing: 1px;
+}
+
+/* أزرار البحث */
+.btnsearch {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btnsearch button {
+    width: 48%;
+    background: #2c3e50; /* لون غامق لأزرار البحث */
+}
+
+.btnsearch button:hover {
+    background: #34495e;
+}
+
+#deleteall {
+    margin: 20px 0;
+}
+
+#deleteall button {
+    background: #c0392b; /* أحمر لزر حذف الكل للتحذير */
+}
+
+/* تنسيق الجدول */
+table {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th {
+    text-transform: uppercase;
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* أزرار الحذف والتعديل داخل الجدول */
+#update, #delete {
+    height: 30px;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1;
+}
+
+#update {
+    background-color: #f39c12; /* برتقالي للتعديل */
+}
+
+#delete {
+    background-color: #e74c3c; /* أحمر للحذف */
+}
