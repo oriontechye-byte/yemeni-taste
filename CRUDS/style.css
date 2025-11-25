@@ -25,7 +25,7 @@ body {
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: #5d4d16; /* تم التغيير إلى برونزي غامق بدلاً من الكحلي */
 }
 
 /* تنسيق حقول الإدخال */
@@ -44,7 +44,7 @@ input {
 
 input:focus {
     background: #f9f9f9;
-    border-color: #3498db; /* لون أزرق عند الكتابة */
+    border-color: #d4af37; /* لون ذهبي عند الكتابة */
     transform: scale(1.01);
 }
 
@@ -79,7 +79,7 @@ button {
     height: 40px;
     border: none;
     cursor: pointer;
-    background: #3498db; /* أزرق أساسي */
+    background: #d4af37; /* لون ذهبي أساسي */
     color: #fff;
     border-radius: 20px;
     margin-top: 10px;
@@ -89,7 +89,7 @@ button {
 }
 
 button:hover {
-    background: #2980b9;
+    background: #b89628; /* ذهبي أغمق قليلاً عند التمرير */
     letter-spacing: 1px;
 }
 
@@ -102,11 +102,11 @@ button:hover {
 
 .btnsearch button {
     width: 48%;
-    background: #2c3e50; /* لون غامق لأزرار البحث */
+    background: #5d4d16; /* لون برونزي غامق لأزرار البحث */
 }
 
 .btnsearch button:hover {
-    background: #34495e;
+    background: #7a651e; /* تفتيح بسيط عند التمرير */
 }
 
 #deleteall {
@@ -127,7 +127,7 @@ table {
 
 table th {
     text-transform: uppercase;
-    background-color: #3498db;
+    background-color: #d4af37; /* خلفية العناوين ذهبية */
     color: white;
     padding: 10px;
 }
@@ -146,7 +146,7 @@ table td {
 }
 
 #update {
-    background-color: #f39c12; /* برتقالي للتعديل */
+    background-color: #f39c12; /* برتقالي للتعديل (يمكن تركه أو تغييره لذهبي فاتح) */
 }
 
 #delete {
