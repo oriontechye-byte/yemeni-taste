@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم - Yemeni Taste</title>
-    <!-- استدعاء نفس التنسيقات والخطوط للحفاظ على التصميم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <!-- تحديث الكاش -->
+    <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
     <!-- الهيدر -->
@@ -19,14 +19,24 @@
                     <h1>Yemeni Taste</h1>
                     <p class="logo-subtitle">إدارة المطعم</p>
                 </div>
-                <ul class="nav-links">
+                
+                <!-- إضافة زر القائمة للجوال -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <ul class="nav-links" id="nav-links">
+                    <!-- زر الإغلاق -->
+                    <div class="close-menu" id="close-menu">&times;</div>
                     <li><a href="index.html">العودة للرئيسية</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- قسم تسجيل الدخول (يظهر فقط إذا لم يسجل الدخول) -->
+    <!-- قسم تسجيل الدخول -->
     <section id="login-section" class="login">
         <div class="container">
             <h2 class="section-title">تسجيل الدخول للإدارة</h2>
@@ -47,32 +57,36 @@
         </div>
     </section>
 
-    <!-- قسم الداش بورد (يظهر فقط بعد تسجيل الدخول) -->
+    <!-- قسم الداش بورد -->
     <section id="dashboard-section" class="menu" style="display: none; padding-top: 8rem;">
         <div class="container">
             <div class="dashboard-header">
-                <h2 class="section-title" style="margin: 0; text-align: right;">إدارة الأصناف</h2>
-                <div>
-                    <button class="admin-btn" onclick="openItemModal()">+ إضافة صنف جديد</button>
-                    <button class="admin-btn danger" onclick="logout()">تسجيل خروج</button>
+                <div class="header-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                    <h2 class="section-title" style="margin: 0;">إدارة الأصناف</h2>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="add-btn" onclick="openItemModal()">+ إضافة صنف</button>
+                        <button class="logout-btn" onclick="logout()">خروج</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- جدول عرض الأصناف -->
-            <table class="items-table">
-                <thead>
-                    <tr>
-                        <th>الصورة</th>
-                        <th>اسم الصنف</th>
-                        <th>السعر</th>
-                        <th>الوصف</th>
-                        <th>إجراءات</th>
-                    </tr>
-                </thead>
-                <tbody id="admin-items-list">
-                    <!-- سيتم تعبئة الجدول بواسطة جافاسكربت -->
-                </tbody>
-            </table>
+            <!-- إضافة حاوية للجدول لضمان التمرير في الجوال -->
+            <div class="table-container">
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>الصورة</th>
+                            <th>اسم الصنف</th>
+                            <th>السعر</th>
+                            <th>الوصف</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-items-list">
+                        <!-- سيتم تعبئة الجدول بواسطة جافاسكربت -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
@@ -101,9 +115,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="item-image">رابط الصورة (مسار الصورة)</label>
+                    <label for="item-image">رابط الصورة</label>
                     <input type="text" id="item-image" value="images/mandi.jpg" required>
-                    <small style="color: #666; margin-top: 5px;">يمكنك استخدام: images/mandi.jpg, images/saltah.png, images/fahsa.jpg ...</small>
+                    <small style="color: #666; margin-top: 5px; display:block;">مثال: images/mandi.jpg</small>
                 </div>
 
                 <button type="submit" class="submit-btn">حفظ التغييرات</button>
@@ -111,7 +125,6 @@
         </div>
     </div>
 
-    <!-- تذييل الصفحة -->
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
