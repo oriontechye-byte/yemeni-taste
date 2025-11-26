@@ -1,92 +1,116 @@
-// ===== 1) Navbar: add 'scrolled' class on scroll =====
-(function() {
-  const header = document.querySelector(".header");
-  const toggleScrolled = () => {
-    if (!header) return;
-    if (window.scrollY > 50) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-  };
-  window.addEventListener("scroll", toggleScrolled, { passive: true });
-  toggleScrolled();
-})();
-
-// ===== 2) Back-to-Top button (created dynamically) =====
-(function() {
-  const btn = document.createElement("button");
-  btn.id = "backToTop";
-  btn.setAttribute("aria-label", "العودة للأعلى");
-  btn.textContent = "↑";
-  document.body.appendChild(btn);
-
-  const toggleBtn = () => {
-    btn.style.display = window.scrollY > 300 ? "block" : "none";
-  };
-  window.addEventListener("scroll", toggleBtn, { passive: true });
-  toggleBtn();
-
-  btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-})();
-
-// ===== 3) Contact form basic validation =====
-(function() {
-  const form = document.querySelector(".contact-form");
-  if (!form) return;
-  // نتأكد أن هذا النموذج ليس نموذج إضافة صنف (لأننا نستخدم كلاس contact-form هناك أيضاً)
-  if (form.id === 'item-form') return; 
-
-  form.addEventListener("submit", function(e) {
-    const name = document.getElementById("name")?.value.trim();
-    const email = document.getElementById("email")?.value.trim();
-    const message = document.getElementById("message")?.value.trim();
-
-    if (!name || !email || !message) {
-      alert("الرجاء تعبئة جميع الحقول قبل الإرسال.");
-      e.preventDefault();
-      return;
-    }
-    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!okEmail) {
-      alert("رجاءً أدخل بريدًا إلكترونيًا صالحًا.");
-      e.preventDefault();
-    }
-  });
-})();
-
-// ===== 4) Reveal-on-scroll using IntersectionObserver =====
-(function() {
-  const revealTargets = document.querySelectorAll(
-    "section, .menu-item, .about-image, .about-text, .info-item"
-  );
-  if (revealTargets.length === 0) return;
-
-  revealTargets.forEach(el => el.classList.add("reveal-init"));
-
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-show");
-          obs.unobserve(entry.target);
+// ===== 1) Navbar & Mobile Menu =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Navbar Scroll Effect
+    const header = document.querySelector(".header");
+    const toggleScrolled = () => {
+        if (!header) return;
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
         }
-      });
-    },
-    { root: null, threshold: 0.12 }
-  );
+    };
+    window.addEventListener("scroll", toggleScrolled, { passive: true });
+    toggleScrolled();
 
-  revealTargets.forEach(el => observer.observe(el));
+    // Hamburger Menu Logic
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const closeMenu = document.getElementById('close-menu');
+    const navItems = document.querySelectorAll('.nav-links a');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.add('active');
+        });
+
+        if (closeMenu) {
+            closeMenu.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        }
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+});
+
+// ===== 2) Back-to-Top Button =====
+(function() {
+    const btn = document.createElement("button");
+    btn.id = "backToTop";
+    btn.setAttribute("aria-label", "العودة للأعلى");
+    btn.textContent = "↑";
+    document.body.appendChild(btn);
+
+    const toggleBtn = () => {
+        btn.style.display = window.scrollY > 300 ? "block" : "none";
+    };
+    window.addEventListener("scroll", toggleBtn, { passive: true });
+    toggleBtn();
+
+    btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+})();
+
+// ===== 3) Contact Form Validation =====
+(function() {
+    const form = document.querySelector(".contact-form");
+    if (!form) return;
+    // نتأكد أن هذا النموذج ليس نموذج إضافة صنف (dashboard item form)
+    if (form.id === 'item-form') return;
+
+    form.addEventListener("submit", function(e) {
+        const name = document.getElementById("name")?.value.trim();
+        const email = document.getElementById("email")?.value.trim();
+        const message = document.getElementById("message")?.value.trim();
+
+        if (!name || !email || !message) {
+            alert("الرجاء تعبئة جميع الحقول قبل الإرسال.");
+            e.preventDefault();
+            return;
+        }
+        const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!okEmail) {
+            alert("رجاءً أدخل بريدًا إلكترونيًا صالحًا.");
+            e.preventDefault();
+        }
+    });
+})();
+
+// ===== 4) Reveal-on-scroll Animation =====
+(function() {
+    const revealTargets = document.querySelectorAll(
+        "section, .menu-item, .about-image, .about-text, .info-item"
+    );
+    if (revealTargets.length === 0) return;
+
+    revealTargets.forEach(el => el.classList.add("reveal-init"));
+
+    const observer = new IntersectionObserver(
+        (entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("reveal-show");
+                    obs.unobserve(entry.target);
+                }
+            });
+        },
+        { root: null, threshold: 0.12 }
+    );
+
+    revealTargets.forEach(el => observer.observe(el));
 })();
 
 /* ==========================================================================
    نظام إدارة القائمة (Dashboard & Menu System)
-   هذا الجزء يتعامل مع عرض الأصناف في الصفحة الرئيسية وإدارتها في الداش بورد
    ========================================================================== */
 
-// 1. البيانات الافتراضية (في حال لم يكن هناك شيء مخزن)
+// 1. البيانات الافتراضية
 const defaultMenuItems = [
     { title: "مندي لحم", price: "10000 ريال", desc: "أرز بسمتي مع لحم الضأن المطهو ببطء مع التوابل اليمنية الأصيلة", image: "images/mandi.jpg" },
     { title: "سلتة يمنية", price: "6000 ريال", desc: "طبق يمني تقليدي ساخن مع اللحم والخضروات والحلبة", image: "images/saltah.png" },
@@ -96,24 +120,23 @@ const defaultMenuItems = [
     { title: "مندي دجاج", price: "6500 ريال", desc: "دجاج كامل مشوي مع أرز بسمتي معطر بالتوابل", image: "images/mandi.jpg" }
 ];
 
-// 2. دالة جلب البيانات (من التخزين المحلي أو الافتراضي)
+// 2. دوال التخزين (LocalStorage)
 function getMenuItems() {
     const stored = localStorage.getItem('yemeniMenu');
     return stored ? JSON.parse(stored) : defaultMenuItems;
 }
 
-// 3. دالة حفظ البيانات
 function saveMenuItems(items) {
     localStorage.setItem('yemeniMenu', JSON.stringify(items));
 }
 
-// 4. عرض القائمة في الصفحة الرئيسية (index.html)
+// 3. عرض القائمة في الصفحة الرئيسية (index.html)
 function renderHomeMenu() {
     const grid = document.getElementById('menu-grid');
-    if (!grid) return; // لسنا في الصفحة الرئيسية
+    if (!grid) return;
 
     const items = getMenuItems();
-    grid.innerHTML = ''; // مسح المحتوى القديم
+    grid.innerHTML = '';
 
     items.forEach(item => {
         const html = `
@@ -132,18 +155,17 @@ function renderHomeMenu() {
     });
 }
 
-// تشغيل عرض القائمة عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', renderHomeMenu);
 
 /* ============================
-   منطق صفحة الداش بورد
+   منطق صفحة الداش بورد (Dashboard Logic)
    ============================ */
 
-// التحقق من حالة تسجيل الدخول عند فتح صفحة الداش بورد
 document.addEventListener('DOMContentLoaded', function() {
     const loginSection = document.getElementById('login-section');
     const dashboardSection = document.getElementById('dashboard-section');
 
+    // إذا كنا في صفحة الداش بورد (العناصر موجودة)
     if (loginSection && dashboardSection) {
         if (localStorage.getItem('isAdminLoggedIn') === 'true') {
             showDashboard();
@@ -154,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// التعامل مع نموذج تسجيل الدخول
+// التعامل مع نموذج تسجيل الدخول للإدمن
 const adminLoginForm = document.getElementById('admin-login-form');
 if (adminLoginForm) {
     adminLoginForm.addEventListener('submit', function(e) {
@@ -171,20 +193,19 @@ if (adminLoginForm) {
     });
 }
 
-// دالة إظهار الداش بورد وتعبئة الجدول
 function showDashboard() {
-    document.getElementById('login-section').style.display = 'none';
-    document.getElementById('dashboard-section').style.display = 'block';
+    const loginSec = document.getElementById('login-section');
+    const dashSec = document.getElementById('dashboard-section');
+    if(loginSec) loginSec.style.display = 'none';
+    if(dashSec) dashSec.style.display = 'block';
     renderAdminTable();
 }
 
-// دالة تسجيل الخروج
 function logout() {
     localStorage.removeItem('isAdminLoggedIn');
     location.reload();
 }
 
-// دالة تعبئة جدول الإدارة
 function renderAdminTable() {
     const tbody = document.getElementById('admin-items-list');
     if (!tbody) return;
@@ -212,7 +233,7 @@ function renderAdminTable() {
 }
 
 /* ============================
-   إدارة النافذة المنبثقة (Modal) والإضافة/التعديل
+   إدارة النافذة المنبثقة (Add/Edit Modal)
    ============================ */
 const itemModal = document.getElementById('item-modal');
 const itemForm = document.getElementById('item-form');
@@ -220,7 +241,7 @@ const itemForm = document.getElementById('item-form');
 function openItemModal() {
     if(!itemModal) return;
     document.getElementById('modal-title').textContent = 'إضافة صنف جديد';
-    document.getElementById('item-index').value = '-1'; // -1 يعني إضافة جديد
+    document.getElementById('item-index').value = '-1';
     itemForm.reset();
     itemModal.classList.add('active');
 }
@@ -249,11 +270,12 @@ function deleteItem(index) {
         items.splice(index, 1);
         saveMenuItems(items);
         renderAdminTable();
-        alert('تم الحذف بنجاح');
+        // تحديث القائمة الرئيسية إذا كانت مفتوحة في نافذة أخرى (اختياري)
+        renderHomeMenu();
     }
 }
 
-// حفظ بيانات النموذج (إضافة أو تعديل)
+// حفظ النموذج (إضافة أو تعديل)
 if (itemForm) {
     itemForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -269,15 +291,14 @@ if (itemForm) {
         const items = getMenuItems();
 
         if (index === -1) {
-            // إضافة جديد
             items.push(newItem);
         } else {
-            // تعديل موجود
             items[index] = newItem;
         }
 
         saveMenuItems(items);
         renderAdminTable();
+        renderHomeMenu(); // تحديث الصفحة الرئيسية فوراً
         closeItemModal();
         alert('تم الحفظ بنجاح!');
     });
